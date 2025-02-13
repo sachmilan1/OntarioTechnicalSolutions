@@ -1,4 +1,4 @@
-package com.OntarioTechniacalSolutions.demo;
+package com.OntarioTechnicalSolutions.demo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
