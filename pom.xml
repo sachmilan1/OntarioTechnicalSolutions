@@ -44,7 +44,7 @@
 		<dependency>
 			<groupId>com.mysql</groupId>
 			<artifactId>mysql-connector-j</artifactId>
-			<version>8.0.33</version> <!-- Replace with the latest stable version -->
+			<version>8.2.0</version> <!-- Replace with the latest stable version -->
 			<exclusions>
 				<exclusion>
 					<groupId>org.slf4j</groupId>
