@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class LoginScreenFX extends Application {
     @FXML
@@ -19,9 +20,9 @@ public class LoginScreenFX extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("com/OntarioTechnicalSolutions/Fit/FXML/LoginScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getClassLoader().getResource("FXML/LoginScreen.fxml"));
         Parent root = fxmlLoader.load();
-        stage.getIcons().add(new Image("com/OntarioTechnicalSolutions/Fit/images/icon.png"));
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/icon.png"))));
         stage.setTitle("Fitness App");
         stage.setScene(new Scene(root));
         stage.show();

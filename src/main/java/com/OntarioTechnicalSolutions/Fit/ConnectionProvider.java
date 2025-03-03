@@ -12,7 +12,7 @@ public class ConnectionProvider {
             Class.forName("org.sqlite.JDBC");
 
             // First, check if the database exists
-            String url = "jdbc:sqlite:" + System.getProperty("user.dir") + "\\" +  "src\\main\\java\\com\\OntarioTechnicalSolutions\\Fit\\database\\OntarioTechnicalSolutions.db";
+            String url = "jdbc:sqlite:" + ConnectionProvider.class.getResource("/database/OntarioTechnicalSolutions.db");
             con = DriverManager.getConnection(url);
             String sql = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, email TEXT)";
 

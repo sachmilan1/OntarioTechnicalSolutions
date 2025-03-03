@@ -9,9 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javax.swing.*;
@@ -49,7 +46,7 @@ public class SceneController {
 
     //--------------------------SWITCH PAGES----------------------//
     public void switchToHomePage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("FXML/HomePage.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FXML/HomePage.fxml")));
         welcomeText.setText("Welcome" + usernameLogin.getText());
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -66,7 +63,7 @@ public class SceneController {
     }
 
     public void switchToRegister(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("FXML/RegisterScreen.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FXML/RegisterScreen.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -74,7 +71,7 @@ public class SceneController {
     }
 
     public void loginScreen(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("com/OntarioTechnicalSolutions/Fit/FXML/LoginScreen.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/FXML/LoginScreen.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
@@ -90,13 +87,6 @@ public class SceneController {
     //-------------------------------//
 
 
-
-    Image loginImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("images/download.jpg")));
-    ImageView loginImageView;
-
-    public void displayImage() {
-        loginImageView.setImage(loginImage);
-    }
 
 
 
@@ -153,6 +143,7 @@ public class SceneController {
                     st.setString(2, email.getText());
                     st.setString(3, registerUsername.getText());
                     st.setString(4, registerPassword.getText());
+
                     if (name.getText().equals("admin") && registerUsername.getText().equals("admin")) {
                         st.setBoolean(5, true);
                     } else {
