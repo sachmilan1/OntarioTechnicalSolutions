@@ -1,4 +1,4 @@
-package com.OntarioTechnicalSolutions.demo;
+package com.OntarioTechnicalSolutions.Fit;
 
 import java.sql.Connection;
 import java.sql.SQLException;

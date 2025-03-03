@@ -1,0 +1,44 @@
+#anchor {
+    -fx-background-color: #16161a;
+}
+
+/*linear-gradient(hex,hex);*/
+
+#anchor-right {
+    -fx-background-color: #16161a
+}
+
+#login-button {
+    -fx-background-color: #f25042;
+    -fx-border-radius: 1000px;
+    -fx-transition: transform 0.3s, box-shadow 0.3s;
+}
+#login-button:hover {
+    -fx-background-color: #e74c3c; /* Hover state color */
+    -fx-transform: scale(1.1) rotate(5deg);   /* Scale effect */
+}
+
+
+#register-button {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1em; /* 12 */
+}
+
+#register-button:hover {
+    -fx-underline: true;
+}
+
+#backToLogin {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1em;
+}
+
+#backToLogin:hover {
+    -fx-underline: true;
+}

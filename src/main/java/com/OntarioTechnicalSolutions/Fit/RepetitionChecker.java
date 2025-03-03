@@ -1,4 +1,4 @@
-package com.OntarioTechnicalSolutions.demo;
+package com.OntarioTechnicalSolutions.Fit;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,8 +17,11 @@ public class RepetitionChecker {
             ResultSet rs = st.executeQuery();
             if(rs.next()&&rs.getInt(1)>0){
                 userExists = true;
-                return userExists;
+                System.out.println("username result: " + rs.getInt(1));
             }
+            rs.close();
+            st.close();
+            con.close();
         }
         catch (SQLException e){
             System.err.println("The error is"+e.getMessage());
@@ -26,7 +29,7 @@ public class RepetitionChecker {
         return userExists;
     }
     public static boolean emailChecker(String email){
-        boolean userExists = false;
+        boolean emailExists = false;
         try{
             Connection con = ConnectionProvider.getCon();
             PreparedStatement st = con.prepareStatement("SELECT Count(*) FROM users WHERE email =?");
@@ -35,13 +38,17 @@ public class RepetitionChecker {
             ResultSet rs= st.executeQuery();
 
             if(rs.next()&&rs.getInt(1)>0){
-                userExists= true;
-                return userExists;
+                emailExists= true;
+                System.out.println("email result: " + rs.getInt(1));
             }
+
+            rs.close();
+            st.close();
+            con.close();
         }
         catch(SQLException e){
             System.err.println("Error"+ e.getMessage());
         }
-        return userExists;
+        return emailExists;
     }
 }
