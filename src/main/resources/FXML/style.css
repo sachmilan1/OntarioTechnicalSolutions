@@ -30,3 +30,21 @@
 #register-button:hover {
     -fx-underline: true;
 }
+
+#backToLogin {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1em;
+}
+
+#backToLogin:hover {
+    -fx-underline: true;
+}
+
+#addWorkoutAnchor {
+    -fx-background-color: #16161a;
+}
+
+/*-----*/
