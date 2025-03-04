@@ -42,3 +42,9 @@
 #backToLogin:hover {
     -fx-underline: true;
 }
+
+#addWorkoutAnchor {
+    -fx-background-color: #16161a;
+}
+
+/*-----*/

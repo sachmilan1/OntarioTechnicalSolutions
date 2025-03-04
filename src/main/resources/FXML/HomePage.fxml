@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
    <children>
       <Button layoutX="197.0" layoutY="188.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="161.0" text="Go to Workouts" />
-      <Label fx:id="welcomeText" alignment="CENTER" layoutX="42.0" layoutY="66.0" prefHeight="60.0" prefWidth="470.0">
+      <Label alignment="CENTER" layoutX="42.0" layoutY="66.0" prefHeight="60.0" prefWidth="470.0" text="Welcome, To Fitlink">
          <font>
             <Font size="30.0" />
          </font>

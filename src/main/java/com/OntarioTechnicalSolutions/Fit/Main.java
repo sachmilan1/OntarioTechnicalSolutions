@@ -2,6 +2,7 @@ package com.OntarioTechnicalSolutions.Fit;
 
 import javafx.application.Application;
 
+import java.io.File;
 import java.net.URL;
 
 
