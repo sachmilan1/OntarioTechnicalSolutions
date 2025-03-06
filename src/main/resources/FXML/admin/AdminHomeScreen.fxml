@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane fx:id="welcomeText" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
    <children>
@@ -15,5 +15,6 @@
       </Label>
       <Button layoutX="250.0" layoutY="135.0" mnemonicParsing="false" text="Go to Workouts" />
       <Button layoutX="230.0" layoutY="175.0" mnemonicParsing="false" onAction="#addWorkoutScreen" text="Add/Remove Workouts" />
+      <ComboBox fx:id="adminBoxOptions" layoutY="2.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

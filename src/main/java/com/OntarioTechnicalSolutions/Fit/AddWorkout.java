@@ -14,7 +14,7 @@ public class AddWorkout {
                                      String imageURL) {
 
         try {
-            Connection con = ConnectionProvider.getConWorkoutDB();
+            Connection con = ConnectionProvider.getCon();
             PreparedStatement st = con.prepareStatement("insert into workouts(name, category, calorie_burn, Description, video_url, image_url) values (?, ?, ?, ?, ?, ?)");
             st.setString(1, workout);
             st.setString(2, category);
@@ -30,6 +30,7 @@ public class AddWorkout {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 }
