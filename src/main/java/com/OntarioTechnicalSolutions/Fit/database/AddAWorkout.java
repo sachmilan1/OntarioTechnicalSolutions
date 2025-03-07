@@ -8,9 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.Statement;
 
-public class AddWorkOut {
+public class AddAWorkout {
     public static void add() {
         JFrame frame = new JFrame("Add a Workout");
         JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10)); // Auto-rows, 2 columns, 10px padding
@@ -147,6 +146,6 @@ public class AddWorkOut {
     }
 
     public static void main(String[] args) {
-        AddWorkOut.add();
+        AddAWorkout.add();
     }
 }
