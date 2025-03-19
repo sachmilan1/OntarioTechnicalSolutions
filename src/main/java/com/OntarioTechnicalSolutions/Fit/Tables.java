@@ -4,6 +4,7 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 
 import javax.swing.*;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -58,5 +59,24 @@ public class Tables {
     }
     public static void main(String []args){
         Tables.runTables();
+    }
+
+    public static void createFavTable(String name){
+        String sql = "CREATE TABLE IF NOT EXISTS " + name + " ("
+                + "WorkOut_PK serial PRIMARY KEY, "
+                + "Name VARCHAR(50), "
+                + "Description VARCHAR(1000), "
+                + "Photo VARCHAR(300), "
+                + "Video VARCHAR(300), " +
+                "Category VARCHAR(50),"
+                + "Muscle VARCHAR(50))";
+
+        try (Connection con = ConnectionProvider.getCon();
+             PreparedStatement st = con.prepareStatement(sql)) {
+            st.executeUpdate();
+            System.out.println(name+" table has been created");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

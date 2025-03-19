@@ -19,7 +19,7 @@ public class AddEditCommon {
         AddEditCommon.common();
         try{
             Connection con = ConnectionProvider.getCon();
-            String sql = "Select * from workouts where name =?";
+            String sql = "Select * from Workouts where name =?";
             PreparedStatement st = con.prepareStatement(sql);
             st.setString(1,name);
             ResultSet rs = st.executeQuery();

@@ -21,10 +21,12 @@ public class AddAWorkout {
         JTextArea descArea = new JTextArea(3, 20); // 3 rows, 20 columns
 
         JLabel photoLabel = new JLabel("Photo:");
-        JButton photoButton = new JButton("Choose Photo");
+        JTextField photoArea = new JTextField();
+        //        JButton photoButton = new JButton("Choose Photo");
 
         JLabel videoLabel = new JLabel("Video:");
-        JButton videoButton = new JButton("Choose Video");
+        JTextField videoArea = new JTextField();
+        //        JButton videoButton = new JButton("Choose Video");
 
         JLabel catLabel = new JLabel("Which Part it will hit:");
         String[] categories = {"Arms", "Back", "Chest", "Core", "Legs", "Shoulders"};
@@ -71,13 +73,13 @@ public class AddAWorkout {
         });
 
         // Photo button action
-        photoButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            int returnValue = fileChooser.showOpenDialog(null);
-            if (returnValue == JFileChooser.APPROVE_OPTION) {
-                System.out.println("Selected Photo: " + fileChooser.getSelectedFile().getPath());
-            }
-        });
+//        photoButton.addActionListener(e -> {
+//            JFileChooser fileChooser = new JFileChooser();
+//            int returnValue = fileChooser.showOpenDialog(null);
+//            if (returnValue == JFileChooser.APPROVE_OPTION) {
+//                System.out.println("Selected Photo: " + fileChooser.getSelectedFile().getPath());
+//            }
+//        });
 
         // Video button action
 //        videoButton.addActionListener(e -> {
@@ -94,18 +96,22 @@ public class AddAWorkout {
             public void actionPerformed(ActionEvent e) {
                 try{
                     Connection con = ConnectionProvider.getCon();
-                    PreparedStatement st = con.prepareStatement("insert into Workouts(Name,Description,Category,Muscle)" +
-                            "VALUES(?,?,?,?)");
+                    PreparedStatement st = con.prepareStatement("insert into Workouts(Name,Description,Photo,Video,Category,Muscle)" +
+                            "VALUES(?,?,?,?,?,?)");
                     String name= nameField.getText();
                     String desc = descArea.getText();
                     String cat = (String)catBox.getSelectedItem();
                     String muscle = (String)muscleBox.getSelectedItem();
+                    String photo = photoArea.getText();
+                    String video = videoArea.getText();
 
                     if(!name.isEmpty()&&!desc.isEmpty()&&!cat.isEmpty()&&!muscle.isEmpty()){
                         st.setString(1,name);
                         st.setString(2,desc);
-                        st.setString(3,cat);
-                        st.setString(4,muscle);
+                        st.setString(3,photo);
+                        st.setString(4,video);
+                        st.setString(5,cat);
+                        st.setString(6,muscle);
                         st.executeUpdate();
                         JOptionPane.showMessageDialog(null,"Workout added to the database","Success",JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -123,10 +129,10 @@ public class AddAWorkout {
         panel.add(new JScrollPane(descArea)); // Wrap text area in scrollpane
 
         panel.add(photoLabel);
-        panel.add(photoButton);
+        panel.add(photoArea);
 
         panel.add(videoLabel);
-        panel.add(videoButton);
+        panel.add(videoArea);
 
         panel.add(catLabel);
         panel.add(catBox);

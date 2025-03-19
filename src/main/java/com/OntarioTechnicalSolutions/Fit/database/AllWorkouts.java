@@ -16,37 +16,76 @@ public class AllWorkouts {
         JFrame frame = new JFrame("All Workouts...");
         JPanel panel = new JPanel();
 
-        String[] columns = {"Name"};
-        DefaultTableModel model = new DefaultTableModel(columns, 0);
+        String[] columns = {"Name","Add to favourites"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0){
+
+            @Override
+            public boolean isCellEditable(int row, int column){
+                return column ==1;
+            }
+
+            @Override
+            //<?> means we are expecting any value
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 1) {
+                    return JToggleButton.class;
+                }
+                return String.class;
+                //If the column index is 1, then it will return a JToggle button class,
+                // else it will return the usual output of JTable column,which is String
+            }
+        };
+
         JTable table = new JTable(model);
 
         try {
             DefaultTableModel mod = (DefaultTableModel) table.getModel();
             Connection con = ConnectionProvider.getCon();
 
-            // ✅ Using prepared statement to prevent SQL injection.
+            // Using prepared statement to prevent SQL injection.
             String sql = "SELECT Name FROM Workouts"; // Only select required columns
             PreparedStatement st = con.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
+            table.getColumnModel().getColumn(1).setCellRenderer(new ButtonRenderer());
+            table.getColumnModel().getColumn(1).setCellEditor(new ButtonEditor());
 
             while (rs.next()) {
-                mod.addRow(new Object[]{ rs.getString("Name") });
+                JButton Button = new JButton("Add to favourites");
+                Button.setSelected(false); // Ensure initial state
+
+                // Print what is being added to the table
+                System.out.println("Adding workout: " + rs.getString("Name") + " with button: " + Button);
+
+                mod.addRow(new Object[]{ rs.getString("Name"), Button });
+
+
             }
         } catch (Exception e) {
             System.err.println("ERROR: " + e.getMessage());
         }
 
-        // ✅ Make table rows clickable
+
+        //Make table rows clickable
         table.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                int selectedRow = table.getSelectedRow(); // ✅ Get selected row index
+            public void mousePressed(MouseEvent e) {
+                JTable table = (JTable) e.getSource();
+                Point point = e.getPoint();
+                int row = table.rowAtPoint(point);
+                int column = table.columnAtPoint(point);
 
-                if (selectedRow >= 0) { // ✅ Fix: Ensure a valid row is selected
-                    String name = table.getValueAt(selectedRow, 0).toString(); // ✅ Get workout name
+                if (column == 1) { // Clicked the toggle button column
+                    table.editCellAt(row, column); // Force editing
+                    Component editor = table.getEditorComponent();
+                    if (editor instanceof JToggleButton) {
+                        JToggleButton toggleButton = (JToggleButton) editor;
+                        toggleButton.doClick(); // Simulate button click
+                    }
+                } else if (row >= 0) { // Clicked anywhere else (row selection)
+                    String name = table.getValueAt(row, 0).toString(); // Get workout name
 
                     String[] options = {"Edit", "Delete", "See in detail", "Cancel"};
-                    int option = JOptionPane.showOptionDialog(frame, "Choose an option:",
+                    int option = JOptionPane.showOptionDialog(table, "Choose an option:",
                             "Admin Actions",
                             JOptionPane.DEFAULT_OPTION,
                             JOptionPane.INFORMATION_MESSAGE,
@@ -56,10 +95,10 @@ public class AllWorkouts {
 
                     switch (option) {
                         case 0:
-                            EditWorkout.edit(name); // ✅ Call EditWorkout with selected name
+                            EditWorkout.edit(name); // Call EditWorkout with selected name
                             break;
                         case 1:
-                            deleteWorkout(name); // ✅ Delete function added
+                            deleteWorkout(name); // Delete function
                             break;
                         case 2:
                             JOptionPane.showMessageDialog(null, "See in detail for: " + name);
@@ -72,6 +111,7 @@ public class AllWorkouts {
             }
         });
 
+
         JScrollPane sp = new JScrollPane(table);
         panel.add(sp);
         frame.add(panel);
@@ -80,7 +120,7 @@ public class AllWorkouts {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    // ✅ New function to delete a workout
+    // New function to delete a workout
     private static void deleteWorkout(String workoutName) {
         int confirm = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete " + workoutName + "?",
                 "Confirm Deletion", JOptionPane.YES_NO_OPTION);
