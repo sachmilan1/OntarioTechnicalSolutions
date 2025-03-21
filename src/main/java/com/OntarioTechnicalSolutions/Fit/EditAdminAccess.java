@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class EditAdminAccess {
     public static void editAdminAccess(String username, boolean accessLevel) throws SQLException {
         Connection con = ConnectionProvider.getCon();
-        PreparedStatement ps = con.prepareStatement("UPDATE users SET isAdmin = ?");
+        PreparedStatement ps = con.prepareStatement("UPDATE users SET isAdmin = ? WHERE name = ?");
 
         ps.setBoolean(1, accessLevel);
         ps.executeUpdate();
