@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConnectionProvider {
+    public static Connection testConnection;
+
     public static Connection getCon() {
         Connection con = null;
         try {
@@ -23,7 +25,7 @@ public class ConnectionProvider {
 //            con.close(); // Close the connection to reconnect
 
             // Now connect to the newly created database
-            con = DriverManager.getConnection(url, "root", "root");
+            con = DriverManager.getConnection(url, "root", "9513");
         } catch (ClassNotFoundException e) {
             System.out.println("error in class");
             System.err.println("MySQL JDBC Driver not found: " + e.getMessage());
