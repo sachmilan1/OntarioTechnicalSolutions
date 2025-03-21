@@ -23,6 +23,13 @@
 			<version>42.7.5</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx-web -->
+		<!-- 25-ea+8 -->
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-web</artifactId>
+			<version>17.0.2</version>
+		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
