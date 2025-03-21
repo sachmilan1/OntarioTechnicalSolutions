@@ -18,6 +18,10 @@
     -fx-transform: scale(1.1) rotate(5deg);   /* Scale effect */
 }
 
+#admin-button {
+    -fx-background-color: #1E3F66;
+}
+
 
 #register-button {
     -fx-border-color: transparent;
@@ -46,5 +50,21 @@
 #addWorkoutAnchor {
     -fx-background-color: #16161a;
 }
+
+.combo-box {
+    -fx-background-image: url("../images/dumbell_hamburgermenu.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
+
+.combo-box .combo-box-base {
+    -fx-background-image: url("../images/dumbell_hamburgermenu.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+}
+
 
 /*-----*/

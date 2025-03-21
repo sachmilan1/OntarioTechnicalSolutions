@@ -1,8 +1,11 @@
 package com.OntarioTechnicalSolutions.Fit;
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 public class AddWorkout {
 
@@ -33,4 +36,188 @@ public class AddWorkout {
 
 
     }
+
+
+    public static void editWorkouts(String workoutEdit, String newName, String newCategory, String newCalorieBurn, String newDescription, String newVideoURL, String newImageURL) throws SQLException {
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("UPDATE workouts SET name = ?, category = ?, calorie_burn = ?, Description = ?, video_url = ?, image_url = ? WHERE name = ?");
+        st.setString(1, newName);
+        st.setString(2, newCategory);
+        st.setString(3, newCalorieBurn);
+        st.setString(4, newDescription);
+        st.setString(5, newVideoURL);
+        st.setString(6, newImageURL);
+
+        // Workout to Edit
+        st.setString(7, workoutEdit);
+        st.executeUpdate();
+        st.close();
+        con.close();
+        JOptionPane.showMessageDialog(null, "Workout Edited Successfully");
+    }
+
+    public static void removeWorkout(String workout) throws SQLException {
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("DELETE FROM workouts WHERE name = ?");
+
+        st.setString(1, workout);
+        st.executeUpdate();
+        st.close();
+        con.close();
+
+        JOptionPane.showMessageDialog(null, "Workout Removed Successfully");
+    }
+
+
+    public static List<Map<String, String>> retrieveWorkout() {
+        List<Map<String, String>> workouts = new ArrayList<Map<String, String>>();
+
+        try {
+            Connection con = ConnectionProvider.getCon();
+            PreparedStatement st = con.prepareStatement("SELECT workout_PK, name, category, calorie_burn, Description, video_url, image_url FROM workouts");
+            ResultSet rs = st.executeQuery();
+
+            System.out.println("Retrieving workouts");
+            while (rs.next()) {
+                Map<String, String> workout = new HashMap<String, String>();
+                workout.put("id", String.valueOf(rs.getInt("workout_PK")));
+                workout.put("name", rs.getString("name"));
+                workout.put("category", rs.getString("category"));
+                workout.put("calorie_burn", rs.getString("calorie_burn"));
+                workout.put("description", rs.getString("Description"));
+                workout.put("video_url", rs.getString("video_url"));
+                workout.put("image_url", rs.getString("image_url"));
+                workouts.add(workout);
+            }
+            st.close();
+            con.close();
+            return workouts;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static List<Map<String, String>> retrieveArmsWorkout() throws SQLException {
+        List<Map<String, String>> workouts = new ArrayList<>();
+
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Arms'");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Map<String, String> workout = new HashMap<>();
+            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
+            workout.put("name", rs.getString("name"));
+            workout.put("category", rs.getString("category"));
+            workout.put("calorie_burn", rs.getString("calorie_burn"));
+            workout.put("description", rs.getString("Description"));
+            workout.put("video_url", rs.getString("video_url"));
+            workout.put("image_url", rs.getString("image_url"));
+            workouts.add(workout);
+        }
+        st.close();
+        con.close();
+        return workouts;
+
+    }
+
+
+    public static List<Map<String, String>> retrieveBackWorkout() throws SQLException {
+        List<Map<String, String>> workouts = new ArrayList<>();
+
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Back'");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Map<String, String> workout = new HashMap<>();
+            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
+            workout.put("name", rs.getString("name"));
+            workout.put("category", rs.getString("category"));
+            workout.put("calorie_burn", rs.getString("calorie_burn"));
+            workout.put("description", rs.getString("Description"));
+            workout.put("video_url", rs.getString("video_url"));
+            workout.put("image_url", rs.getString("image_url"));
+            workouts.add(workout);
+        }
+        st.close();
+        con.close();
+        return workouts;
+
+    }
+
+
+    public static List<Map<String, String>> retrieveCardioWorkout() throws SQLException {
+        List<Map<String, String>> workouts = new ArrayList<>();
+
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Cardio'");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Map<String, String> workout = new HashMap<>();
+            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
+            workout.put("name", rs.getString("name"));
+            workout.put("category", rs.getString("category"));
+            workout.put("calorie_burn", rs.getString("calorie_burn"));
+            workout.put("description", rs.getString("Description"));
+            workout.put("video_url", rs.getString("video_url"));
+            workout.put("image_url", rs.getString("image_url"));
+            workouts.add(workout);
+        }
+        st.close();
+        con.close();
+        return workouts;
+
+    }
+
+    public static List<Map<String, String>> retrieveChestWorkout() throws SQLException {
+        List<Map<String, String>> workouts = new ArrayList<>();
+
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Chest'");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Map<String, String> workout = new HashMap<>();
+            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
+            workout.put("name", rs.getString("name"));
+            workout.put("category", rs.getString("category"));
+            workout.put("calorie_burn", rs.getString("calorie_burn"));
+            workout.put("description", rs.getString("Description"));
+            workout.put("video_url", rs.getString("video_url"));
+            workout.put("image_url", rs.getString("image_url"));
+            workouts.add(workout);
+        }
+        st.close();
+        con.close();
+        return workouts;
+
+    }
+
+    public static List<Map<String, String>> retrieveLegsWorkout() throws SQLException {
+        List<Map<String, String>> workouts = new ArrayList<>();
+
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Legs'");
+        ResultSet rs = st.executeQuery();
+
+        while (rs.next()) {
+            Map<String, String> workout = new HashMap<>();
+            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
+            workout.put("name", rs.getString("name"));
+            workout.put("category", rs.getString("category"));
+            workout.put("calorie_burn", rs.getString("calorie_burn"));
+            workout.put("description", rs.getString("Description"));
+            workout.put("video_url", rs.getString("video_url"));
+            workout.put("image_url", rs.getString("image_url"));
+            workouts.add(workout);
+        }
+        st.close();
+        con.close();
+        return workouts;
+
+    }
+
 }

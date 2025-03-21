@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
+   <children>
+      <Label layoutX="218.0" layoutY="22.0" text="EDIT WORKOUTS">
+         <font>
+            <Font name="Open Sans Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="124.0" layoutY="62.0" text="Choose Workout to Edit">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="workoutToEdit" layoutX="301.0" layoutY="58.0" prefWidth="150.0" />
+      <Label layoutX="161.0" layoutY="102.0" text="New Name">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="workoutName" layoutX="302.0" layoutY="98.0" />
+      <Label layoutX="153.0" layoutY="143.0" text="New Category">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="workoutCategories" layoutX="301.0" layoutY="139.0" prefWidth="150.0" />
+      <Label layoutX="142.0" layoutY="184.0" text="New Calorie Burn">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="workoutCalorieBurn" layoutX="302.0" layoutY="180.0" />
+      <TextArea fx:id="workoutDescription" layoutX="303.0" layoutY="216.0" prefHeight="68.0" prefWidth="149.0" />
+      <Label layoutX="143.0" layoutY="242.0" text="New Description">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="videoURL" layoutX="303.0" layoutY="296.0" />
+      <TextField fx:id="imageURL" layoutX="303.0" layoutY="343.0" />
+      <Label layoutX="143.0" layoutY="300.0" text="New Video URL">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="142.0" layoutY="347.0" text="New Image URL">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font>
+      </Label>
+      <Button layoutX="498.0" layoutY="180.0" mnemonicParsing="false" onAction="#editDatabaseWorkout" text="UPDATE" />
+      <Button layoutX="477.0" layoutY="216.0" mnemonicParsing="false" onAction="#homeScreenAdmin" text="BACK TO HOME" />
+   </children>
+</AnchorPane>
