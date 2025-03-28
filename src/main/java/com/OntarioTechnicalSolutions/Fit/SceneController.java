@@ -412,6 +412,7 @@ public class SceneController implements Initializable {
                         CurrentUser.getInstance().setUserID(rs.getInt("User_PK"));
                         CurrentUser.getInstance().setUserName(rs.getString("username"));
                         CurrentUser.getInstance().setGuest(false);
+                        CurrentUser.getInstance().setAdmin(isAdmin);
 
                         JOptionPane.showMessageDialog(null, "Logged in as " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
                         homeScreenAdmin(event);
@@ -566,7 +567,7 @@ public class SceneController implements Initializable {
                 workoutImage.setCache(true);
                 workoutImage.setPreserveRatio(true);
 
-                if (CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) {
+                if ((CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) && !CurrentUser.getInstance().getAdmin()) {
                     Button addToFavouritesButton = new Button("Add to Favourites");
                     addToFavouritesButton.setOnAction(event -> {
                         try {
@@ -583,8 +584,8 @@ public class SceneController implements Initializable {
 
                 else {
                     workoutLabel.setTextFill(Color.WHITE);
-                    workoutBox.getChildren().addAll(workoutLabel);
                     workoutLabel.setTextFill(Color.WHITE);
+                    workoutBox.getChildren().addAll(workoutImage, workoutLabel);
                 }
                 workoutLabel.setOnMouseClicked(event -> {
                     showWorkoutDetails(workout);

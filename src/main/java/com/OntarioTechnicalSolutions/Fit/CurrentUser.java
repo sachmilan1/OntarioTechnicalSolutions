@@ -8,6 +8,7 @@ public class CurrentUser {
     private int userID;
     private String userName;
     private boolean isGuest;
+    private boolean isAdmin;
 
     private CurrentUser() {
         userID = -1;
@@ -34,11 +35,19 @@ public class CurrentUser {
         this.isGuest = isGuest;
     }
 
+    public void setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+
     public int getUserID() {
         if (userID == -1) {
             return -1;
         }
         return userID;
+    }
+
+    public boolean getAdmin() {
+        return isAdmin;
     }
 
     public String getUserName() {
