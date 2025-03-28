@@ -34,6 +34,6 @@ public class ProcessImage {
         fis.close();
         return bytes;
     }
-    
+
 
 }
