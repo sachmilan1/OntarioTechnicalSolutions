@@ -2,7 +2,7 @@
 
 ## Project Information
 
-FitLink is a Java Swing based application that combines an intricately designed UI along with a functional backend to provide users with an immersive workout experience! It lets you view a large catalogue of workouts and search for specific ones that best suit your 
+FitLink is a Java Swing based application that combines an intricately designed UI along with a functional backend to provide users with an immersive workout experience! It lets you view a large catalogue of workouts and search for specific ones that best suit your goals. You can filter your searches, add and delete workouts from your plan, and even view images and videos to properly help you practice the workout of your choice. FitLink is dedicated to helping you pursure your fitness goals
 
 
 
@@ -11,11 +11,11 @@ FitLink is a Java Swing based application that combines an intricately designed 
 ## How to Run
 1. Clone the repository:
 ```
-git clone [https://github.com/OntarioTech-CS-program/w25-csci2020u-assignment01-a1-abrar-obinelo](https://github.com/OntarioTech-CS-program/w25-csci2020u-assignment02-a2-abrar-obinelo-bryon.git)
+https://github.com/sachmilan1/OntarioTechnicalSolutions.git
 ```
 2. Navigate to the project directory.
 ```
-cd w25-csci2020u-assignment02-a2-abrar-obinelo-bryon
+cd OntarioTechnicalSolutions
 ```
 3. Run the server (`FileSharingServerGUI.java`) and then the client (`FileSharingClientGUI.java`). You can compile and run the program using either the terminal, or your preferred IDE. 
 
