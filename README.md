@@ -38,9 +38,6 @@ This assumes that Java and Git are properly installed on your machine. If not, p
 
 
 
-https://github.com/user-attachments/assets/6615a4fc-f1a9-41ac-b2d4-ef62526e3ce6
 
 
 
-## Other Resources
-No other resources were used in the completion of this project.
