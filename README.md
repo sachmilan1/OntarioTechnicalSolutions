@@ -17,7 +17,7 @@ https://github.com/sachmilan1/OntarioTechnicalSolutions.git
 ```
 cd OntarioTechnicalSolutions
 ```
-3. Run the server (`FileSharingServerGUI.java`) and then the client (`FileSharingClientGUI.java`). You can compile and run the program using either the terminal, or your preferred IDE. 
+3. Run the server (`Main`) 
 
 Here are the steps to compile the program on the terminal. First, compile the Java files using the following command:
 ```
@@ -25,7 +25,7 @@ javac src/main/java/*.java
 ```
 Then, start the server using the following command:
 ```
-java -cp ./src/main/java FileSharingServerGUI
+java -cp ./src/main/java/com.OntarioTechnicalSolutions
 ```
 Finally, start the client using the following command:
 ```
