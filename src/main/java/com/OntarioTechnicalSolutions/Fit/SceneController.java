@@ -1,6 +1,8 @@
 package com.OntarioTechnicalSolutions.Fit;
 
 import javafx.application.Platform;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -25,6 +27,7 @@ import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 
 import javax.swing.*;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -32,10 +35,6 @@ import java.sql.*;
 import java.util.List;
 
 
-/* TODO: FIX IT SO THAT workoutsREGULAR is for normal users cuz its still set to admin
-*   and also make a favourites page and add stuff to database yadayada
-*   and make a page to edit workouts the end WE ALMOST DONE BROOOO
- */
 public class SceneController implements Initializable {
     @FXML
     TextField usernameLogin;
@@ -56,6 +55,8 @@ public class SceneController implements Initializable {
     @FXML
     ComboBox<String> menuItems;
     @FXML
+    ComboBox<String> guestItems;
+    @FXML
     ComboBox<String> adminBoxOptions;
 
     @FXML
@@ -69,11 +70,12 @@ public class SceneController implements Initializable {
     @FXML
     Label welcomeText;
 
-    @FXML VBox specificWorkout;
 
 
 
     ArrayList<String> category = new ArrayList<>();
+
+
 
     private Stage stage;
     private Scene scene;
@@ -112,6 +114,28 @@ public class SceneController implements Initializable {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    public void switchToGuestHome(ActionEvent event) throws IOException {
+        CurrentUser.getInstance().setGuest(true);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/GuestHomePage.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+    }
+    public void guestWorkouts(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/GuestAllWorkouts.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void switchGuestPage(ActionEvent event) throws IOException {
+        if (guestItems.getValue().equals("Home")) {
+            switchToGuestHome(event);
+        } else if (guestItems.getValue().equals("Logout")) {
+            loginScreen(event);
+        }
     }
 
 
@@ -227,9 +251,10 @@ public class SceneController implements Initializable {
         stage.show();
     }
 
-    public void removeWorkoutFromDatabase() throws SQLException {
+    public void removeWorkoutFromDatabase(ActionEvent event) throws SQLException, IOException {
         if(workoutToEdit != null) {
             AddWorkout.removeWorkout(workoutToEdit.getValue());
+            adminRemoveWorkouts(event);
         } else {
             JOptionPane.showMessageDialog(null, "Please select a workout to remove");
         }
@@ -264,11 +289,27 @@ public class SceneController implements Initializable {
     }
 
 
-    public void addWorkoutToDatabase() {
-        if (workoutName.getText().isEmpty() || workoutCalorieBurn.getText().isEmpty() || workoutCategories.getSelectionModel().getSelectedItem() == null || videoURL.getText().isEmpty() || imageURL.getText().isEmpty() || workoutDescription.getText().isEmpty()) {
+    public void addImage() {
+        JFrame frame = new JFrame();
+        JFileChooser chooser = new JFileChooser();
+        frame.add(chooser);
+        frame.setVisible(true);
+        frame.setSize(800, 600);
+        chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        chooser.addActionListener(e -> {
+            if (e.getActionCommand().equals("ApproveSelection")) {
+                ProcessImage.getInstance().setPathToImage(chooser.getSelectedFile().getAbsolutePath());
+                frame.dispose();
+            } else {
+                frame.dispose();
+            }
+        });
+    }
+    public void addWorkoutToDatabase() throws IOException {
+        if (workoutName.getText().isEmpty() || workoutCalorieBurn.getText().isEmpty() || workoutCategories.getSelectionModel().getSelectedItem() == null || videoURL.getText().isEmpty() || workoutDescription.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please fill ALL fields");
         } else {
-            AddWorkout.addToDatabase(workoutName.getText(), workoutCategories.getValue(), workoutCalorieBurn.getText(), workoutDescription.getText(), videoURL.getText(), imageURL.getText());
+            AddWorkout.addToDatabase(workoutName.getText(), workoutCategories.getValue(), workoutCalorieBurn.getText(), workoutDescription.getText(), videoURL.getText(), ProcessImage.getInstance().getImage());
         }
     }
 
@@ -370,12 +411,16 @@ public class SceneController implements Initializable {
                     if(isAdmin && pass.equals(password)) {
                         CurrentUser.getInstance().setUserID(rs.getInt("User_PK"));
                         CurrentUser.getInstance().setUserName(rs.getString("username"));
+                        CurrentUser.getInstance().setGuest(false);
+
                         JOptionPane.showMessageDialog(null, "Logged in as " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
                         homeScreenAdmin(event);
                     }
                     else if(password.equals(pass)) {
                         CurrentUser.getInstance().setUserID(rs.getInt("User_PK"));
                         CurrentUser.getInstance().setUserName(rs.getString("username"));
+                        CurrentUser.getInstance().setGuest(false);
+
                         System.out.println(CurrentUser.getInstance().getUserID());
                         JOptionPane.showMessageDialog(null, "Successfully logged in as " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
                         switchToHomePage(event);
@@ -491,8 +536,9 @@ public class SceneController implements Initializable {
         }
     }
 
-    private void displayWorkouts() {
+    private void displayWorkouts() throws IOException {
         List<Map<String, String>> workoutsList = AddWorkout.retrieveWorkout();
+        Map<String, byte[]> images = AddWorkout.retrieveImage();
 
         if (workoutsList != null && !workoutsList.isEmpty()) {
             for (Map<String, String> workout : workoutsList) {
@@ -503,21 +549,47 @@ public class SceneController implements Initializable {
                 Label workoutLabel = new Label(workout.get("name"));
                 workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
+                ImageView workoutImage = new ImageView();
+                String workoutID = workout.get("id");
+                byte[] imageData = images.get(workoutID);
 
-                Button addToFavouritesButton = new Button("Add to Favourites");
-                addToFavouritesButton.setOnAction(event -> {
-                    try {
-                        System.out.println(workout.get("id"));
-                        AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
+                if (imageData.length > 0) {
+                    Image image = new Image(new ByteArrayInputStream(imageData));
+                    workoutImage.setImage(image);
+                } else {
+                    workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
+                }
+
+                workoutImage.setFitWidth(100);
+                workoutImage.setFitHeight(100);
+                workoutImage.setSmooth(true);
+                workoutImage.setCache(true);
+                workoutImage.setPreserveRatio(true);
+
+                if (CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) {
+                    Button addToFavouritesButton = new Button("Add to Favourites");
+                    addToFavouritesButton.setOnAction(event -> {
+                        try {
+                            System.out.println(workout.get("id"));
+                            AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
+                    workoutLabel.setTextFill(Color.WHITE);
+                    workoutBox.getChildren().addAll(workoutImage, workoutLabel, addToFavouritesButton);
+                    workoutLabel.setTextFill(Color.WHITE);
+                }
+
+                else {
+                    workoutLabel.setTextFill(Color.WHITE);
+                    workoutBox.getChildren().addAll(workoutLabel);
+                    workoutLabel.setTextFill(Color.WHITE);
+                }
                 workoutLabel.setOnMouseClicked(event -> {
                     showWorkoutDetails(workout);
                 });
-                workoutLabel.setTextFill(Color.WHITE);
-                workoutBox.getChildren().addAll(workoutLabel, addToFavouritesButton);
+
                 workoutVBOX.getChildren().add(workoutBox);
             }
         } else {
@@ -528,7 +600,7 @@ public class SceneController implements Initializable {
 
 
     @FXML VBox arms;
-    private void displayArmsWorkouts() throws SQLException {
+    private void displayArmsWorkouts() throws SQLException, IOException {
         List<Map<String, String>> workoutsList = AddWorkout.retrieveArmsWorkout();
 
         if (workoutsList != null && !workoutsList.isEmpty()) {
@@ -537,11 +609,12 @@ public class SceneController implements Initializable {
                 workoutBox.setSpacing(10);
                 workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
+//                byte[] imageData = ProcessImage.getInstance().setPathToImage(workout.get("image_url"));
+//                ImageView workoutImageView = new ImageView();
+//                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
+//
                 Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label label = new Label(workout.get("name"));
-
+                workoutLabel.setStyle("-fx-text-fill: white;");
                 Button addToFavouritesButton = new Button("Add to Favourites");
                 addToFavouritesButton.setOnAction(event -> {
                     try {
@@ -798,6 +871,9 @@ public class SceneController implements Initializable {
         if (adminBoxOptions != null) {
             adminBoxOptions.setItems(FXCollections.observableArrayList("Home", "Logout"));
         }
+        if (guestItems != null) {
+            guestItems.setItems(FXCollections.observableArrayList("Home", "Logout"));
+        }
 
 
         if(suggestions != null) {
@@ -828,14 +904,18 @@ public class SceneController implements Initializable {
         }
 
         if (workoutVBOX != null) {
-            displayWorkouts();
+            try {
+                displayWorkouts();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
 
         if (arms != null) {
             try {
                 displayArmsWorkouts();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            }  catch (Exception e) {
+                e.printStackTrace();
             }
         }
 
@@ -877,6 +957,7 @@ public class SceneController implements Initializable {
         if (welcomeText != null) {
             welcomeText.setText("Welcome, " + CurrentUser.getInstance().getUserName());
         }
+
 
     }
 

@@ -2,13 +2,17 @@
 
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="anchor" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
    <children>
-      <VBox fx:id="workoutVBOX" layoutX="155.0" layoutY="100.0" prefHeight="200.0" prefWidth="292.0" />
+      <VBox fx:id="workoutVBOX" layoutX="79.0" layoutY="100.0" prefHeight="300.0" prefWidth="446.0">
+         <children>
+            <ScrollBar orientation="VERTICAL" prefHeight="302.0" prefWidth="14.0" />
+         </children></VBox>
       <Label layoutX="220.0" layoutY="33.0" prefHeight="42.0" prefWidth="160.0" text="All Workouts" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Open Sans Bold" size="24.0" />

@@ -1,15 +1,18 @@
 package com.OntarioTechnicalSolutions.Fit;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class CurrentUser {
     private static CurrentUser currentUser;
     private int userID;
     private String userName;
+    private boolean isGuest;
 
     private CurrentUser() {
         userID = -1;
         userName = "";
+        isGuest = false;
     }
 
     public static CurrentUser getInstance() {
@@ -27,17 +30,20 @@ public class CurrentUser {
         this.userName = userName;
     }
 
+    public void setGuest(boolean isGuest) {
+        this.isGuest = isGuest;
+    }
+
     public int getUserID() {
         if (userID == -1) {
-            JOptionPane.showMessageDialog(null, "You are not logged in");
             return -1;
         }
         return userID;
     }
 
     public String getUserName() {
-        if (userName == "") {
-            JOptionPane.showMessageDialog(null, "You are not logged in");
+        if (Objects.equals(userName, "")) {
+
             return "";
         }
         return userName;

@@ -14,7 +14,7 @@ public class AddWorkout {
                                      String Calorie_burn,
                                      String description,
                                      String videoURL,
-                                     String imageURL) {
+                                     byte[] imageURL) {
 
         try {
             Connection con = ConnectionProvider.getCon();
@@ -24,7 +24,7 @@ public class AddWorkout {
             st.setString(3, Calorie_burn);
             st.setString(4, description);
             st.setString(5, videoURL);
-            st.setString(6, imageURL);
+            st.setBytes(6, imageURL);
             st.executeUpdate();
             System.out.println("Workout added to Database");
             st.close();
@@ -74,7 +74,7 @@ public class AddWorkout {
 
         try {
             Connection con = ConnectionProvider.getCon();
-            PreparedStatement st = con.prepareStatement("SELECT workout_PK, name, category, calorie_burn, Description, video_url, image_url FROM workouts");
+            PreparedStatement st = con.prepareStatement("SELECT workout_PK, name, category, calorie_burn, Description, video_url FROM workouts");
             ResultSet rs = st.executeQuery();
 
             System.out.println("Retrieving workouts");
@@ -86,7 +86,6 @@ public class AddWorkout {
                 workout.put("calorie_burn", rs.getString("calorie_burn"));
                 workout.put("description", rs.getString("Description"));
                 workout.put("video_url", rs.getString("video_url"));
-                workout.put("image_url", rs.getString("image_url"));
                 workouts.add(workout);
             }
             st.close();
@@ -96,6 +95,25 @@ public class AddWorkout {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static Map<String, byte[]> retrieveImage() {
+        Map<String, byte[]>  image = new HashMap<>();
+
+        try {
+            Connection con = ConnectionProvider.getCon();
+            PreparedStatement st = con.prepareStatement("SELECT workout_PK, image_url FROM workouts");
+            ResultSet rs = st.executeQuery();
+
+            while (rs.next()) {
+                int workoutID = rs.getInt("workout_PK");
+                byte[] imageData = rs.getBytes("image_url");
+                image.put(String.valueOf(workoutID), imageData);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return image;
     }
 
     public static List<Map<String, String>> retrieveArmsWorkout() throws SQLException {

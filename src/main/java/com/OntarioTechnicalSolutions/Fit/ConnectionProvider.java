@@ -6,7 +6,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class ConnectionProvider {
+    private static Connection mockConnection;
+
     public static Connection getCon() {
+        if (mockConnection != null) {
+            return mockConnection;
+        }
         Connection con = null;
         try {
             Class.forName("org.sqlite.JDBC");
@@ -32,6 +37,10 @@ public class ConnectionProvider {
             System.err.println("Error establishing database connection: " + e.getMessage());
         }
         return con;
+    }
+
+    public static void setConnection(Connection connection) {
+        mockConnection = connection;
     }
 
 //    public static void main(String []args){
