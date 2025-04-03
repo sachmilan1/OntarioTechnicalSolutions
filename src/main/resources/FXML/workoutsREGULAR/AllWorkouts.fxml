@@ -18,7 +18,7 @@
          <Font name="Open Sans Bold" size="24.0" />
       </font>
    </Label>
-   <ScrollPane id="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" layoutY="100.0" prefHeight="288.0" prefWidth="600.0" style="-fx-background-color: transparent" stylesheets="@../styleDesc.css ">
+   <ScrollPane id="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" layoutY="100.0" prefHeight="288.0" prefWidth="600.0" style="-fx-background-color: #16161a" stylesheets="@../styleDesc.css ">
       <VBox fx:id="workoutVBOX" spacing="10" style="-fx-background-color: #16161a;" />
       <styleClass>
          <String fx:value="scroll-pane" />
