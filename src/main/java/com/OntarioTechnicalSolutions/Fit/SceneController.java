@@ -500,7 +500,6 @@ public class SceneController implements Initializable {
                         workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
                         Label workoutDescription = new Label(workout.get("description"));
-                        workoutDescription.setStyle("-fx-padding: 10px;");
                         workoutDescription.setWrapText(true);
                         workoutDescription.setPrefWidth(200);
                         workoutDescription.setMaxWidth(200);
@@ -528,7 +527,9 @@ public class SceneController implements Initializable {
                                     throw new RuntimeException(e);
                                 }
                             });
-                            addToFavouritesButton.setStyle("-fx-padding: 5px; -fx-margin-left: 10px;");
+                            addToFavouritesButton.setStyle("-fx-padding: 5px; -fx-margin-left: 10px; -fx-background-color: #f25042;\n" +
+                                    "    -fx-border-radius: 1000px;\n" +
+                                    "    -fx-transition: transform 0.3s, box-shadow 0.3s;");
                             workoutLabel.setTextFill(Color.WHITE);
                             workoutDescription.setTextFill(Color.WHITE);
                             workoutBox.getChildren().addAll(workoutImage, workoutLabel, addToFavouritesButton, workoutDescription);
