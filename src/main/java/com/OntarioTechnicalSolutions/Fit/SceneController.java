@@ -1,9 +1,12 @@
 package com.OntarioTechnicalSolutions.Fit;
 
 import javafx.application.Platform;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -67,19 +70,15 @@ public class SceneController implements Initializable {
     @FXML
     VBox workoutVBOX;
 
+    @FXML Label clearButton;
+
     @FXML
     Label welcomeText;
 
-
-
-
-    ArrayList<String> category = new ArrayList<>();
-
-
+    ObservableList<String> allSuggestions = FXCollections.observableArrayList("Cardio", "Legs", "Arms", "Back", "Chest");
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
 
     //--------------------------SWITCH PAGES----------------------//
@@ -146,24 +145,6 @@ public class SceneController implements Initializable {
         stage.show();
     }
 
-    public void searchToReg(ActionEvent event) throws IOException {
-        String selectedItem = suggestions.getSelectionModel().getSelectedItem();
-        if (selectedItem.equals("Arms")) {
-            switchToArmsReg(event);
-        }
-        if(selectedItem.equals("Legs")) {
-            switchToLegsReg(event);
-        }
-        if(selectedItem.equals("Cardio")) {
-            switchToCardioReg(event);
-        }
-        if(selectedItem.equals("Back")) {
-            switchToBackReg(event);
-        }
-        if (selectedItem.equals("Chest")) {
-            switchToChestReg(event);
-        }
-    }
 
     public void menuSwitch(ActionEvent event) throws IOException {
         if (menuItems.getValue().equals("Home")) {
@@ -176,37 +157,6 @@ public class SceneController implements Initializable {
             loginScreen(event);
         }
     }
-    public void switchToBackReg(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsREGULAR/Back.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToArmsReg(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsREGULAR/Arms.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToLegsReg(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsREGULAR/Legs.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToCardioReg(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsREGULAR/Cardio.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToChestReg(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsREGULAR/Chest.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
     //-------------------------------------------------------------//
 
 
@@ -288,6 +238,10 @@ public class SceneController implements Initializable {
         }
     }
 
+    public void initWorkouts(ActionEvent event) throws IOException {
+        AllWorkouts(event);
+    }
+
 
     public void addImage() {
         JFrame frame = new JFrame();
@@ -336,55 +290,6 @@ public class SceneController implements Initializable {
         stage.show();
     }
 
-    public void searchTo(ActionEvent event) throws IOException {
-        String selectedItem = suggestions.getSelectionModel().getSelectedItem();
-        if (selectedItem.equals("Arms")) {
-            switchToArms(event);
-        }
-        if(selectedItem.equals("Legs")) {
-            switchToLegs(event);
-        }
-        if(selectedItem.equals("Cardio")) {
-            switchToCardio(event);
-        }
-        if(selectedItem.equals("Back")) {
-            switchToBack(event);
-        }
-        if (selectedItem.equals("Chest")) {
-            switchToChest(event);
-        }
-    }
-
-    public void switchToBack(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsADMIN/Back.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToArms(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsADMIN/Arms.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToLegs(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsADMIN/Legs.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToCardio(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsADMIN/Cardio.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-    public void switchToChest(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/workoutsADMIN/Chest.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
     //-------------------------------//
 
 
@@ -412,7 +317,7 @@ public class SceneController implements Initializable {
                         CurrentUser.getInstance().setUserID(rs.getInt("User_PK"));
                         CurrentUser.getInstance().setUserName(rs.getString("username"));
                         CurrentUser.getInstance().setGuest(false);
-                        CurrentUser.getInstance().setAdmin(isAdmin);
+                        CurrentUser.getInstance().setAdmin(true);
 
                         JOptionPane.showMessageDialog(null, "Logged in as " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
                         homeScreenAdmin(event);
@@ -421,6 +326,7 @@ public class SceneController implements Initializable {
                         CurrentUser.getInstance().setUserID(rs.getInt("User_PK"));
                         CurrentUser.getInstance().setUserName(rs.getString("username"));
                         CurrentUser.getInstance().setGuest(false);
+                        CurrentUser.getInstance().setAdmin(false);
 
                         System.out.println(CurrentUser.getInstance().getUserID());
                         JOptionPane.showMessageDialog(null, "Successfully logged in as " + username, "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -504,15 +410,56 @@ public class SceneController implements Initializable {
                     ResultSet ts = ps.executeQuery();
 
                     if (ts.next()) {
+
+
                         Label workoutName = new Label(ts.getString("name"));
 
+                        ImageView workoutImage = new ImageView();
+                        byte[] imageData = ts.getBytes("image_url");
+
+                        Label description = new Label(ts.getString("Description"));
+
+                        if (imageData.length > 0) {
+                            Image image = new Image(new ByteArrayInputStream(imageData));
+                            workoutImage.setImage(image);
+                        } else {
+                            workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
+                        }
+
+                        workoutImage.setFitWidth(100);
+                        workoutImage.setFitHeight(100);
+                        workoutImage.setSmooth(true);
+                        workoutImage.setCache(true);
+                        workoutImage.setPreserveRatio(true);
+
                         HBox workoutBox = new HBox();
+                        workoutBox.setSpacing(10);
+                        workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
                         Button removeButton = new Button("Remove from Favourites");
                         removeButton.setOnAction(event -> handleRemoveFavourites(event, userID, workoutID));
+                        ScrollPane scrollPane = new ScrollPane();
+                        scrollPane.setFitToWidth(true);
+                        scrollPane.setContent(workoutBox);
+                        scrollPane.setStyle("-fx-background: #222; -fx-border-color: transparent");
+
+                        favouritesBox.setPadding(new Insets(20));
+                        favouritesBox.getChildren().add(scrollPane);
+
                         workoutName.setTextFill(Color.WHITE);
-                        workoutBox.getChildren().addAll(workoutName, removeButton);
+                        workoutBox.getChildren().addAll(workoutImage, workoutName, removeButton, description);
                         favouritesBox.getChildren().add(workoutBox);
+
+                        final Map<String, String> workoutDetails = new HashMap<>();
+                        workoutDetails.put("id", String.valueOf(workoutID));
+                        workoutDetails.put("name", ts.getString("name"));
+                        workoutDetails.put("category", ts.getString("category"));
+                        workoutDetails.put("calorie_burn", ts.getString("calorie_burn"));
+                        workoutDetails.put("description", ts.getString("description"));
+                        workoutDetails.put("video_url", ts.getString("video_url"));
+                        workoutName.setOnMouseClicked(event -> {
+                            showWorkoutDetails(workoutDetails);
+                        });
                     }
                 }
             }
@@ -537,255 +484,98 @@ public class SceneController implements Initializable {
         }
     }
 
-    private void displayWorkouts() throws IOException {
-        List<Map<String, String>> workoutsList = AddWorkout.retrieveWorkout();
-        Map<String, byte[]> images = AddWorkout.retrieveImage();
 
-        if (workoutsList != null && !workoutsList.isEmpty()) {
-            for (Map<String, String> workout : workoutsList) {
-                HBox workoutBox = new HBox();
-                workoutBox.setSpacing(10);
-                workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
+    private void displayWorkouts(String searchItem) throws IOException {
+        workoutVBOX.getChildren().clear();
+        try {
+            List<Map<String, String>> workoutsList = AddWorkout.searchWorkout(searchItem);
+            if (!workoutsList.isEmpty()) {
+                for (Map<String, String> workout : workoutsList) {
 
-                Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
+                        HBox workoutBox = new HBox(10);
+                        workoutBox.setSpacing(10);
+                        workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
-                ImageView workoutImage = new ImageView();
-                String workoutID = workout.get("id");
-                byte[] imageData = images.get(workoutID);
+                        Label workoutLabel = new Label(workout.get("name"));
+                        workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
-                if (imageData.length > 0) {
-                    Image image = new Image(new ByteArrayInputStream(imageData));
-                    workoutImage.setImage(image);
-                } else {
-                    workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
-                }
+                        Label workoutDescription = new Label(workout.get("description"));
+                        workoutDescription.setStyle("-fx-padding: 10px;");
+                        workoutDescription.setWrapText(true);
+                        workoutDescription.setPrefWidth(200);
+                        workoutDescription.setMaxWidth(200);
+                        workoutDescription.setTextFill(Color.WHITE);
+                    HBox.setHgrow(workoutDescription, Priority.ALWAYS);
 
-                workoutImage.setFitWidth(100);
-                workoutImage.setFitHeight(100);
-                workoutImage.setSmooth(true);
-                workoutImage.setCache(true);
-                workoutImage.setPreserveRatio(true);
+                        ImageView workoutImage = new ImageView();
+                        byte[] imageData = AddWorkout.retrieveImage().get(workout.get("id"));
 
-                if ((CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) && !CurrentUser.getInstance().getAdmin()) {
-                    Button addToFavouritesButton = new Button("Add to Favourites");
-                    addToFavouritesButton.setOnAction(event -> {
-                        try {
-                            System.out.println(workout.get("id"));
-                            AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
+                        if (imageData.length > 0) {
+                            Image image = new Image(new ByteArrayInputStream(imageData));
+                            workoutImage.setImage(image);
+                        } else {
+                            workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
                         }
-                    });
-                    workoutLabel.setTextFill(Color.WHITE);
-                    workoutBox.getChildren().addAll(workoutImage, workoutLabel, addToFavouritesButton);
-                    workoutLabel.setTextFill(Color.WHITE);
+
+
+                        if ((CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) && !CurrentUser.getInstance().getAdmin()) {
+                            Button addToFavouritesButton = new Button("Add to Favourites");
+                            addToFavouritesButton.setOnAction(event -> {
+                                try {
+                                    System.out.println(workout.get("id"));
+                                    AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
+                                } catch (SQLException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
+                            addToFavouritesButton.setStyle("-fx-padding: 5px; -fx-margin-left: 10px;");
+                            workoutLabel.setTextFill(Color.WHITE);
+                            workoutDescription.setTextFill(Color.WHITE);
+                            workoutBox.getChildren().addAll(workoutImage, workoutLabel, addToFavouritesButton, workoutDescription);
+                        } else {
+                            workoutLabel.setTextFill(Color.WHITE);
+                            workoutLabel.setTextFill(Color.WHITE);
+                            workoutDescription.setTextFill(Color.WHITE);
+                            workoutBox.getChildren().addAll(workoutImage, workoutLabel, workoutDescription);
+                        }
+                        workoutLabel.setOnMouseClicked(event -> {
+                            showWorkoutDetails(workout);
+                        });
+
+                        if (imageData.length > 0) {
+                            Image image = new Image(new ByteArrayInputStream(imageData));
+                            workoutImage.setImage(image);
+                        } else {
+                            workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
+                        }
+
+                        workoutImage.setFitWidth(100);
+                        workoutImage.setFitHeight(100);
+                        workoutImage.setSmooth(true);
+                        workoutImage.setCache(true);
+                        workoutImage.setPreserveRatio(true);
+                        workoutLabel.setOnMouseClicked(event -> {
+                            showWorkoutDetails(workout);
+                        });
+
+                        ScrollPane scrollPane = new ScrollPane();
+                        scrollPane.setFitToWidth(true);
+                        scrollPane.setContent(workoutBox);
+                        workoutBox.setStyle("-fx-background-color: #16161a");
+                        scrollPane.setStyle("-fx-background-color: #16161a; -fx-border-color: transparent;");
+
+
+                        workoutVBOX.setPadding(new Insets(20));
+                        workoutVBOX.getChildren().add(scrollPane);
+
                 }
-
-                else {
-                    workoutLabel.setTextFill(Color.WHITE);
-                    workoutLabel.setTextFill(Color.WHITE);
-                    workoutBox.getChildren().addAll(workoutImage, workoutLabel);
-                }
-                workoutLabel.setOnMouseClicked(event -> {
-                    showWorkoutDetails(workout);
-                });
-
-                workoutVBOX.getChildren().add(workoutBox);
+            } else {
+                Label noWorkouts = new Label("No Workouts Found");
+                workoutVBOX.getChildren().add(noWorkouts);
+                noWorkouts.setStyle("-fx-background-color: white;");
             }
-        } else {
-            Label noWorkouts = new Label("No Workouts Found");
-            workoutVBOX.getChildren().add(noWorkouts);
-        }
-    }
-
-
-    @FXML VBox arms;
-    private void displayArmsWorkouts() throws SQLException, IOException {
-        List<Map<String, String>> workoutsList = AddWorkout.retrieveArmsWorkout();
-
-        if (workoutsList != null && !workoutsList.isEmpty()) {
-            for (Map<String, String> workout : workoutsList) {
-                HBox workoutBox = new HBox();
-                workoutBox.setSpacing(10);
-                workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-//                byte[] imageData = ProcessImage.getInstance().setPathToImage(workout.get("image_url"));
-//                ImageView workoutImageView = new ImageView();
-//                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-//
-                Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-text-fill: white;");
-                Button addToFavouritesButton = new Button("Add to Favourites");
-                addToFavouritesButton.setOnAction(event -> {
-                    try {
-                        System.out.println(workout.get("id"));
-                        AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                workoutLabel.setOnMouseClicked(event -> {
-                    showWorkoutDetails(workout);
-                });
-                workoutLabel.setTextFill(Color.WHITE);
-                workoutBox.getChildren().addAll(workoutLabel, addToFavouritesButton);
-                arms.getChildren().add(workoutBox);
-            }
-        } else {
-            Label noWorkouts = new Label("No Workouts Found");
-            arms.getChildren().add(noWorkouts);
-        }
-    }
-
-    @FXML VBox back;
-    private void displayBackWorkouts() throws SQLException {
-        List<Map<String, String>> workoutsList = AddWorkout.retrieveBackWorkout();
-
-        if (workoutsList != null && !workoutsList.isEmpty()) {
-            for (Map<String, String> workout : workoutsList) {
-                HBox workoutBox = new HBox();
-                workoutBox.setSpacing(10);
-                workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label label = new Label(workout.get("name"));
-
-                Button addToFavouritesButton = new Button("Add to Favourites");
-                addToFavouritesButton.setOnAction(event -> {
-                    try {
-                        System.out.println(workout.get("id"));
-                        AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                workoutLabel.setOnMouseClicked(event -> {
-                    showWorkoutDetails(workout);
-                });
-                workoutLabel.setTextFill(Color.WHITE);
-                workoutBox.getChildren().addAll(workoutLabel, addToFavouritesButton);
-                back.getChildren().add(workoutBox);
-            }
-        } else {
-            Label noWorkouts = new Label("No Workouts Found");
-            back.getChildren().add(noWorkouts);
-        }
-    }
-
-
-
-    @FXML VBox cardio;
-    private void displayCardioWorkouts() throws SQLException {
-        List<Map<String, String>> workoutsList = AddWorkout.retrieveCardioWorkout();
-
-        if (workoutsList != null && !workoutsList.isEmpty()) {
-            for (Map<String, String> workout : workoutsList) {
-                HBox workoutBox = new HBox();
-                workoutBox.setSpacing(10);
-                workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label label = new Label(workout.get("name"));
-
-                Button addToFavouritesButton = new Button("Add to Favourites");
-                addToFavouritesButton.setOnAction(event -> {
-                    try {
-                        System.out.println(workout.get("id"));
-                        AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                workoutLabel.setOnMouseClicked(event -> {
-                    showWorkoutDetails(workout);
-                });
-                workoutLabel.setTextFill(Color.WHITE);
-                workoutBox.getChildren().addAll(workoutLabel, addToFavouritesButton);
-                cardio.getChildren().add(workoutBox);
-            }
-        } else {
-            Label noWorkouts = new Label("No Workouts Found");
-            cardio.getChildren().add(noWorkouts);
-        }
-    }
-
-    @FXML VBox chest;
-    private void displayChestWorkouts() throws SQLException {
-        List<Map<String, String>> workoutsList = AddWorkout.retrieveChestWorkout();
-
-        if (workoutsList != null && !workoutsList.isEmpty()) {
-            for (Map<String, String> workout : workoutsList) {
-                HBox workoutBox = new HBox();
-                workoutBox.setSpacing(10);
-                workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label label = new Label(workout.get("name"));
-
-                Button addToFavouritesButton = new Button("Add to Favourites");
-                addToFavouritesButton.setOnAction(event -> {
-                    try {
-                        System.out.println(workout.get("id"));
-                        AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                workoutLabel.setOnMouseClicked(event -> {
-                    showWorkoutDetails(workout);
-                });
-                workoutLabel.setTextFill(Color.WHITE);
-                workoutBox.getChildren().addAll(workoutLabel, addToFavouritesButton);
-                chest.getChildren().add(workoutBox);
-            }
-        } else {
-            Label noWorkouts = new Label("No Workouts Found");
-            chest.getChildren().add(noWorkouts);
-        }
-    }
-
-    @FXML VBox legs;
-    private void displayLegsWorkouts() throws SQLException {
-        List<Map<String, String>> workoutsList = AddWorkout.retrieveLegsWorkout();
-
-        if (workoutsList != null && !workoutsList.isEmpty()) {
-            for (Map<String, String> workout : workoutsList) {
-                HBox workoutBox = new HBox();
-                workoutBox.setSpacing(10);
-                workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label workoutLabel = new Label(workout.get("name"));
-                workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
-
-                Label label = new Label(workout.get("name"));
-
-                Button addToFavouritesButton = new Button("Add to Favourites");
-                addToFavouritesButton.setOnAction(event -> {
-                    try {
-                        System.out.println(workout.get("id"));
-                        AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-                workoutLabel.setOnMouseClicked(event -> {
-                    showWorkoutDetails(workout);
-                });
-
-                workoutLabel.setTextFill(Color.WHITE);
-                workoutBox.getChildren().addAll(workoutLabel, addToFavouritesButton);
-                legs.getChildren().add(workoutBox);
-            }
-        } else {
-            Label noWorkouts = new Label("No Workouts Found");
-            legs.getChildren().add(noWorkouts);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -800,8 +590,7 @@ public class SceneController implements Initializable {
             Color labelColor = Color.WHITE;
             Label workoutName = styleLabel("Workout: " + workout.get("name"), labelFont, labelColor);
             Label category = styleLabel("Category: " + workout.get("category"), labelFont, labelColor);
-            Label calories = styleLabel("Calories: " + workout.get("calories"), labelFont, labelColor);
-            Label workoutDescription = styleLabel("Description: " + workout.get("description"), labelFont, labelColor);
+            Label calories = styleLabel("Calories: " + workout.get("calorie_burn"), labelFont, labelColor);
             String videoURL = workout.get("video_url");
             if(videoURL == null || videoURL.isEmpty()) {
                 videoURL = "https://www.youtube.com/embed/ykJmrZ5v0Oo";
@@ -817,8 +606,9 @@ public class SceneController implements Initializable {
             webEngine.loadContent(embeddedVideoURL);
             workoutName.setTextFill(labelColor);
             workoutName.setFont(labelFont);
-            vBox.getChildren().addAll(workoutName, category, calories, workoutDescription, webView);
+            vBox.getChildren().addAll(workoutName, category, calories, webView);
             Scene scene = new Scene(vBox, 400, 500);
+            scene.getStylesheets().add(Objects.requireNonNull(getClass().getClassLoader().getResource("FXML/webview.css")).toExternalForm());
             videoStage.setScene(scene);
             videoStage.setTitle("Workout Details");
             videoStage.show();
@@ -836,6 +626,14 @@ public class SceneController implements Initializable {
     @Override
     @FXML
     public void initialize(URL location, ResourceBundle resources) {
+        if (workoutVBOX != null) {
+            try {
+                displayWorkouts("");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         if (workoutCategories != null) {
             workoutCategories.setItems(FXCollections.observableArrayList("Cardio", "Legs", "Arms", "Back", "Chest"));
         }
@@ -877,80 +675,11 @@ public class SceneController implements Initializable {
         }
 
 
-        if(suggestions != null) {
-            suggestions.setVisible(false);
-            ObservableList<String> allSuggestions = FXCollections.observableArrayList("Cardio", "Legs", "Arms", "Back", "Chest");
-
-            searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue.isEmpty()) {
-                    suggestions.setVisible(false);
-                    return;
-                }
-
-                ObservableList<String> filteredSuggestions = FXCollections.observableArrayList();
-                for (String suggestion : allSuggestions) {
-                    if (suggestion.toLowerCase().startsWith(newValue.toLowerCase())) {
-                        filteredSuggestions.add(suggestion);
-                    }
-                }
-
-                suggestions.setItems(filteredSuggestions);
-                suggestions.setVisible(!filteredSuggestions.isEmpty());
-            });
-        }
-
         if (accessLevels != null) {
             ObservableList<String> allAccessLevels = FXCollections.observableArrayList("True", "False");
             accessLevels.setItems(FXCollections.observableArrayList(allAccessLevels));
         }
 
-        if (workoutVBOX != null) {
-            try {
-                displayWorkouts();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        if (arms != null) {
-            try {
-                displayArmsWorkouts();
-            }  catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        if (back != null) {
-            try {
-                displayBackWorkouts();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        if (cardio != null) {
-            try {
-                displayCardioWorkouts();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        if (chest != null) {
-            try {
-                displayChestWorkouts();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
-        if (legs != null) {
-            try {
-                displayLegsWorkouts();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        }
         if (favouritesBox != null) {
             displayFavourites();
         }
@@ -958,6 +687,46 @@ public class SceneController implements Initializable {
         if (welcomeText != null) {
             welcomeText.setText("Welcome, " + CurrentUser.getInstance().getUserName());
         }
+
+        if(suggestions != null) {
+            suggestions.setVisible(false);
+            searchbar.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue.isEmpty()) {
+                    suggestions.setVisible(false);
+                    return;
+                }
+                ObservableList<String> filtered = FXCollections.observableArrayList();
+                for (String suggestion : allSuggestions) {
+                    if (suggestion.toLowerCase().startsWith(newValue.toLowerCase())) {
+                        filtered.add(suggestion);
+                    }
+                }
+                suggestions.setItems(filtered);
+                suggestions.setVisible(!filtered.isEmpty());
+            });
+
+            clearButton.setOnMouseClicked(event -> {
+                try {
+                    displayWorkouts("");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            suggestions.setOnMouseClicked(event -> {
+                String selected = suggestions.getSelectionModel().getSelectedItem();
+                if (selected != null) {
+                    searchbar.setText(selected);
+                    suggestions.setVisible(false);
+                    try {
+                        displayWorkouts(selected);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+        }
+
 
 
     }

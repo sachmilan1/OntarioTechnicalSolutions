@@ -13,6 +13,6 @@
             <Font name="Open Sans Bold" size="35.0" />
          </font></Label>
       <ComboBox id="combo-box" fx:id="menuItems" layoutX="20.0" layoutY="22.0" onAction="#menuSwitch" prefHeight="38.0" prefWidth="51.0" styleClass="combo-box" stylesheets="@style.css" />
-      <VBox fx:id="favouritesBox" layoutX="160.0" layoutY="110.0" prefHeight="200.0" prefWidth="303.0" />
+      <VBox fx:id="favouritesBox" layoutX="1.0" layoutY="110.0" prefHeight="291.0" prefWidth="600.0" />
    </children>
 </AnchorPane>

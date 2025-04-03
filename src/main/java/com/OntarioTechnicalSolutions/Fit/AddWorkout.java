@@ -116,11 +116,11 @@ public class AddWorkout {
         return image;
     }
 
-    public static List<Map<String, String>> retrieveArmsWorkout() throws SQLException {
+    public static List<Map<String, String>> searchWorkout(String search) throws SQLException {
         List<Map<String, String>> workouts = new ArrayList<>();
-
         Connection con = ConnectionProvider.getCon();
-        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Arms'");
+        PreparedStatement st = con.prepareStatement("SELECT workout_PK, name, category, calorie_burn, Description, video_url FROM workouts WHERE LOWER(category) LIKE ?");
+        st.setString(1, "%" + search.toLowerCase() + "%");
         ResultSet rs = st.executeQuery();
 
         while (rs.next()) {
@@ -131,105 +131,6 @@ public class AddWorkout {
             workout.put("calorie_burn", rs.getString("calorie_burn"));
             workout.put("description", rs.getString("Description"));
             workout.put("video_url", rs.getString("video_url"));
-            workout.put("image_url", rs.getString("image_url"));
-            workouts.add(workout);
-        }
-        st.close();
-        con.close();
-        return workouts;
-
-    }
-
-
-    public static List<Map<String, String>> retrieveBackWorkout() throws SQLException {
-        List<Map<String, String>> workouts = new ArrayList<>();
-
-        Connection con = ConnectionProvider.getCon();
-        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Back'");
-        ResultSet rs = st.executeQuery();
-
-        while (rs.next()) {
-            Map<String, String> workout = new HashMap<>();
-            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
-            workout.put("name", rs.getString("name"));
-            workout.put("category", rs.getString("category"));
-            workout.put("calorie_burn", rs.getString("calorie_burn"));
-            workout.put("description", rs.getString("Description"));
-            workout.put("video_url", rs.getString("video_url"));
-            workout.put("image_url", rs.getString("image_url"));
-            workouts.add(workout);
-        }
-        st.close();
-        con.close();
-        return workouts;
-
-    }
-
-
-    public static List<Map<String, String>> retrieveCardioWorkout() throws SQLException {
-        List<Map<String, String>> workouts = new ArrayList<>();
-
-        Connection con = ConnectionProvider.getCon();
-        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Cardio'");
-        ResultSet rs = st.executeQuery();
-
-        while (rs.next()) {
-            Map<String, String> workout = new HashMap<>();
-            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
-            workout.put("name", rs.getString("name"));
-            workout.put("category", rs.getString("category"));
-            workout.put("calorie_burn", rs.getString("calorie_burn"));
-            workout.put("description", rs.getString("Description"));
-            workout.put("video_url", rs.getString("video_url"));
-            workout.put("image_url", rs.getString("image_url"));
-            workouts.add(workout);
-        }
-        st.close();
-        con.close();
-        return workouts;
-
-    }
-
-    public static List<Map<String, String>> retrieveChestWorkout() throws SQLException {
-        List<Map<String, String>> workouts = new ArrayList<>();
-
-        Connection con = ConnectionProvider.getCon();
-        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Chest'");
-        ResultSet rs = st.executeQuery();
-
-        while (rs.next()) {
-            Map<String, String> workout = new HashMap<>();
-            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
-            workout.put("name", rs.getString("name"));
-            workout.put("category", rs.getString("category"));
-            workout.put("calorie_burn", rs.getString("calorie_burn"));
-            workout.put("description", rs.getString("Description"));
-            workout.put("video_url", rs.getString("video_url"));
-            workout.put("image_url", rs.getString("image_url"));
-            workouts.add(workout);
-        }
-        st.close();
-        con.close();
-        return workouts;
-
-    }
-
-    public static List<Map<String, String>> retrieveLegsWorkout() throws SQLException {
-        List<Map<String, String>> workouts = new ArrayList<>();
-
-        Connection con = ConnectionProvider.getCon();
-        PreparedStatement st = con.prepareStatement("SELECT * FROM workouts WHERE category ='Legs'");
-        ResultSet rs = st.executeQuery();
-
-        while (rs.next()) {
-            Map<String, String> workout = new HashMap<>();
-            workout.put("id", String.valueOf(rs.getInt("workout_PK")));
-            workout.put("name", rs.getString("name"));
-            workout.put("category", rs.getString("category"));
-            workout.put("calorie_burn", rs.getString("calorie_burn"));
-            workout.put("description", rs.getString("Description"));
-            workout.put("video_url", rs.getString("video_url"));
-            workout.put("image_url", rs.getString("image_url"));
             workouts.add(workout);
         }
         st.close();
