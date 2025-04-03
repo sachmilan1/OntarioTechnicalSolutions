@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="anchor" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
    <children>
-      <VBox fx:id="workoutVBOX" layoutX="155.0" layoutY="100.0" prefHeight="200.0" prefWidth="292.0" />
+      <ScrollPane id="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" layoutY="100.0" prefHeight="288.0" prefWidth="600.0" style="-fx-background-color: transparent" stylesheets="@styleDesc.css">
+      <VBox fx:id="workoutVBOX" spacing="10" style="-fx-background-color: #16161a;" />
+         <styleClass>
+            <String fx:value="track" />
+            <String fx:value="thumb" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="scroll-bar" />
+            <String fx:value="increment-button" />
+            <String fx:value="increment-arrow" />
+            <String fx:value="decrement-button" />
+            <String fx:value="decrement-arrow" />
+         </styleClass>
+      </ScrollPane>
       <Label layoutX="220.0" layoutY="33.0" prefHeight="42.0" prefWidth="160.0" text="All Workouts" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Open Sans Bold" size="24.0" />

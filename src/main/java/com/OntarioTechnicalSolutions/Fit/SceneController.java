@@ -728,7 +728,9 @@ public class SceneController implements Initializable {
             });
         }
 
-
+        if (workoutVBOX != null) {
+            workoutVBOX.getStylesheets().add(getClass().getClassLoader().getResource("FXML/styleDesc.css").toExternalForm());
+        }
 
     }
 
