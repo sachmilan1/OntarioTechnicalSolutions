@@ -1,5 +1,6 @@
 package com.OntarioTechnicalSolutions.Fit;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -35,7 +36,7 @@ public class Tables {
         }
     }
     public static void main(String []args){
-        Tables table = new Tables();
-        table.runTables();
+        System.out.println(System.getProperty("user.dir"));
+
     }
 }

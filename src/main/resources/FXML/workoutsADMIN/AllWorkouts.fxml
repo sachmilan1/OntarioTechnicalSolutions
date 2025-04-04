@@ -22,8 +22,9 @@
             <String fx:value="increment-arrow" />
             <String fx:value="decrement-button" />
             <String fx:value="decrement-arrow" />
-            <String fx:value="scroll-pane" />
             <String fx:value="scroll-bar" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="viewport" />
          </styleClass>
       </ScrollPane>
       <Label layoutX="222.0" layoutY="14.0" prefHeight="42.0" prefWidth="160.0" text="All Workouts" textAlignment="CENTER" textFill="WHITE">

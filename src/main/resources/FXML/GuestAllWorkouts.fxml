@@ -15,12 +15,12 @@
          <styleClass>
             <String fx:value="track" />
             <String fx:value="thumb" />
-            <String fx:value="scroll-pane" />
             <String fx:value="scroll-bar" />
             <String fx:value="increment-button" />
             <String fx:value="increment-arrow" />
             <String fx:value="decrement-button" />
             <String fx:value="decrement-arrow" />
+            <String fx:value="viewport" />
          </styleClass>
       </ScrollPane>
       <Label layoutX="220.0" layoutY="33.0" prefHeight="42.0" prefWidth="160.0" text="All Workouts" textAlignment="CENTER" textFill="WHITE">

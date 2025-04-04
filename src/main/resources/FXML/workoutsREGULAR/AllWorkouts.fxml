@@ -21,12 +21,13 @@
    <ScrollPane id="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" layoutY="100.0" prefHeight="288.0" prefWidth="600.0" style="-fx-background-color: #16161a" stylesheets="@../styleDesc.css ">
       <VBox fx:id="workoutVBOX" spacing="10" style="-fx-background-color: #16161a;" />
       <styleClass>
-         <String fx:value="scroll-pane" />
          <String fx:value="decrement-arrow" />
          <String fx:value="decrement-button" />
          <String fx:value="increment-arrow" />
          <String fx:value="increment-button" />
          <String fx:value="scroll-bar" />
+         <String fx:value="scroll-pane" />
+         <String fx:value="viewport" />
       </styleClass>
    </ScrollPane>
    <ComboBox id="combo-box" fx:id="menuItems" layoutX="28.0" layoutY="24.0" onAction="#menuSwitch" prefHeight="38.0" prefWidth="51.0" styleClass="combo-box" stylesheets="@../style.css" />
