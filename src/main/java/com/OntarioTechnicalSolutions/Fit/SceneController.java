@@ -418,6 +418,11 @@ public class SceneController implements Initializable {
                         byte[] imageData = ts.getBytes("image_url");
 
                         Label description = new Label(ts.getString("Description"));
+                        description.setWrapText(true);
+                        description.setPrefWidth(200);
+                        description.setMaxWidth(200);
+                        description.setTextFill(Color.WHITE);
+                        HBox.setHgrow(description, Priority.ALWAYS);
 
                         if (imageData.length > 0) {
                             Image image = new Image(new ByteArrayInputStream(imageData));
@@ -447,6 +452,11 @@ public class SceneController implements Initializable {
                         favouritesBox.getChildren().add(scrollPane);
 
                         workoutName.setTextFill(Color.WHITE);
+                        removeButton.setStyle("-fx-padding: 5px; -fx-margin-left: 10px; -fx-background-color: #f25042;\n" +
+                                "    -fx-border-radius: 1000px;\n" +
+                                "    -fx-transition: transform 0.3s, box-shadow 0.3s;");
+
+                        description.setWrapText(true);
                         workoutBox.getChildren().addAll(workoutImage, workoutName, removeButton, description);
                         favouritesBox.getChildren().add(workoutBox);
 
