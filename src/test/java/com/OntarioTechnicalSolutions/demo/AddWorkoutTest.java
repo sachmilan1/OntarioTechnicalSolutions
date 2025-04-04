@@ -67,4 +67,26 @@ public class AddWorkoutTest {
 
          verify(mockStatement, times(1)).executeUpdate();
     }
+    @Test
+    void testEditAdminAccess() throws Exception {
+        when(mockStatement.executeUpdate()).thenReturn(1);
+
+        EditAdminAccess.editAdminAccess("testuser", true);
+
+        verify(mockStatement, times(1)).setBoolean(1, true);
+        verify(mockStatement, times(1)).setString(2, "testuser");
+        verify(mockStatement, times(1)).executeUpdate();
+    }
+
+    @Test
+    void testRetrieveUsers() throws Exception {
+        when(mockResultSet.next()).thenReturn(true, true, false);
+        when(mockResultSet.getString("name")).thenReturn("Alice", "Bob");
+
+        List<String> users = EditAdminAccess.retrieveUsers();
+
+        assertEquals(2, users.size());
+        assertTrue(users.contains("Alice"));
+        assertTrue(users.contains("Bob"));
+    }
 }
