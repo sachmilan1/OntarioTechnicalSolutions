@@ -492,82 +492,82 @@ public class SceneController implements Initializable {
             if (!workoutsList.isEmpty()) {
                 for (Map<String, String> workout : workoutsList) {
 
-                        HBox workoutBox = new HBox(10);
-                        workoutBox.setSpacing(10);
-                        workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
+                    HBox workoutBox = new HBox(10);
+                    workoutBox.setSpacing(10);
+                    workoutBox.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
-                        Label workoutLabel = new Label(workout.get("name"));
-                        workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
+                    Label workoutLabel = new Label(workout.get("name"));
+                    workoutLabel.setStyle("-fx-padding: 10px; -fx-border-width: 1px; -fx-border-color: black;");
 
-                        Label workoutDescription = new Label(workout.get("description"));
-                        workoutDescription.setWrapText(true);
-                        workoutDescription.setPrefWidth(200);
-                        workoutDescription.setMaxWidth(200);
-                        workoutDescription.setTextFill(Color.WHITE);
+                    Label workoutDescription = new Label(workout.get("description"));
+                    workoutDescription.setWrapText(true);
+                    workoutDescription.setPrefWidth(200);
+                    workoutDescription.setMaxWidth(200);
+                    workoutDescription.setTextFill(Color.WHITE);
                     HBox.setHgrow(workoutDescription, Priority.ALWAYS);
 
-                        ImageView workoutImage = new ImageView();
-                        byte[] imageData = AddWorkout.retrieveImage().get(workout.get("id"));
+                    ImageView workoutImage = new ImageView();
+                    byte[] imageData = AddWorkout.retrieveImage().get(workout.get("id"));
 
-                        if (imageData.length > 0) {
-                            Image image = new Image(new ByteArrayInputStream(imageData));
-                            workoutImage.setImage(image);
-                        } else {
-                            workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
-                        }
+                    if (imageData.length > 0) {
+                        Image image = new Image(new ByteArrayInputStream(imageData));
+                        workoutImage.setImage(image);
+                    } else {
+                        workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
+                    }
 
 
-                        if ((CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) && !CurrentUser.getInstance().getAdmin()) {
-                            Button addToFavouritesButton = new Button("Add to Favourites");
-                            addToFavouritesButton.setOnAction(event -> {
-                                try {
-                                    System.out.println(workout.get("id"));
-                                    AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
-                                } catch (SQLException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            });
-                            addToFavouritesButton.setStyle("-fx-padding: 5px; -fx-margin-left: 10px; -fx-background-color: #f25042;\n" +
-                                    "    -fx-border-radius: 1000px;\n" +
-                                    "    -fx-transition: transform 0.3s, box-shadow 0.3s;");
-                            workoutLabel.setTextFill(Color.WHITE);
-                            workoutDescription.setTextFill(Color.WHITE);
-                            workoutBox.getChildren().addAll(workoutImage, workoutLabel, addToFavouritesButton, workoutDescription);
-                        } else {
-                            workoutLabel.setTextFill(Color.WHITE);
-                            workoutLabel.setTextFill(Color.WHITE);
-                            workoutDescription.setTextFill(Color.WHITE);
-                            workoutBox.getChildren().addAll(workoutImage, workoutLabel, workoutDescription);
-                        }
-                        workoutLabel.setOnMouseClicked(event -> {
-                            showWorkoutDetails(workout);
+                    if ((CurrentUser.getInstance().getUserID() != -1 && !CurrentUser.getInstance().getUserName().isEmpty()) && !CurrentUser.getInstance().getAdmin()) {
+                        Button addToFavouritesButton = new Button("Add to Favourites");
+                        addToFavouritesButton.setOnAction(event -> {
+                            try {
+                                System.out.println(workout.get("id"));
+                                AddToFavourites.addToFavourites(CurrentUser.getInstance().getUserID(), Integer.parseInt(workout.get("id")));
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
                         });
+                        addToFavouritesButton.setStyle("-fx-padding: 5px; -fx-margin-left: 10px; -fx-background-color: #f25042;\n" +
+                                "    -fx-border-radius: 1000px;\n" +
+                                "    -fx-transition: transform 0.3s, box-shadow 0.3s;");
+                        workoutLabel.setTextFill(Color.WHITE);
+                        workoutDescription.setTextFill(Color.WHITE);
+                        workoutBox.getChildren().addAll(workoutImage, workoutLabel, addToFavouritesButton, workoutDescription);
+                    } else {
+                        workoutLabel.setTextFill(Color.WHITE);
+                        workoutLabel.setTextFill(Color.WHITE);
+                        workoutDescription.setTextFill(Color.WHITE);
+                        workoutBox.getChildren().addAll(workoutImage, workoutLabel, workoutDescription);
+                    }
+                    workoutLabel.setOnMouseClicked(event -> {
+                        showWorkoutDetails(workout);
+                    });
 
-                        if (imageData.length > 0) {
-                            Image image = new Image(new ByteArrayInputStream(imageData));
-                            workoutImage.setImage(image);
-                        } else {
-                            workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
-                        }
+                    if (imageData.length > 0) {
+                        Image image = new Image(new ByteArrayInputStream(imageData));
+                        workoutImage.setImage(image);
+                    } else {
+                        workoutImage.setImage(new Image(String.valueOf(getClass().getClassLoader().getResource("images/no_image.jpg"))));
+                    }
 
-                        workoutImage.setFitWidth(100);
-                        workoutImage.setFitHeight(100);
-                        workoutImage.setSmooth(true);
-                        workoutImage.setCache(true);
-                        workoutImage.setPreserveRatio(true);
-                        workoutLabel.setOnMouseClicked(event -> {
-                            showWorkoutDetails(workout);
-                        });
+                    workoutImage.setFitWidth(100);
+                    workoutImage.setFitHeight(100);
+                    workoutImage.setSmooth(true);
+                    workoutImage.setCache(true);
+                    workoutImage.setPreserveRatio(true);
+                    workoutLabel.setOnMouseClicked(event -> {
+                        showWorkoutDetails(workout);
+                    });
 
-                        ScrollPane scrollPane = new ScrollPane();
-                        scrollPane.setFitToWidth(true);
-                        scrollPane.setContent(workoutBox);
-                        workoutBox.setStyle("-fx-background-color: #16161a");
-                        scrollPane.setStyle("-fx-background-color: #16161a; -fx-border-color: transparent;");
+                    ScrollPane scrollPane = new ScrollPane();
+                    scrollPane.setFitToWidth(true);
+                    scrollPane.setContent(workoutBox);
+                    workoutBox.setStyle("-fx-background-color: #16161a");
+                    scrollPane.setStyle("-fx-background-color: #16161a; -fx-border-color: transparent;");
 
 
-                        workoutVBOX.setPadding(new Insets(20));
-                        workoutVBOX.getChildren().add(scrollPane);
+                    workoutVBOX.setPadding(new Insets(20));
+                    workoutVBOX.getChildren().add(scrollPane);
 
                 }
             } else {

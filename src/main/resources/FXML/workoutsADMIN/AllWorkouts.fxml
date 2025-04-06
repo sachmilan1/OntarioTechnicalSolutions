@@ -15,7 +15,7 @@
 <AnchorPane id="anchor" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
    <children>
       <ScrollPane id="scroll-pane" fitToWidth="true" hbarPolicy="NEVER" layoutY="100.0" prefHeight="288.0" prefWidth="600.0" style="-fx-background-color: transparent" stylesheets="@../styleDesc.css">
-      <VBox fx:id="workoutVBOX" spacing="10" style="-fx-background-color: #16161a;" />
+         <VBox fx:id="workoutVBOX" spacing="10" style="-fx-background-color: #16161a;" />
          <styleClass>
             <String fx:value="track" />
             <String fx:value="increment-button" />

@@ -28,13 +28,12 @@ public class AddWorkout {
             st.executeUpdate();
             System.out.println("Workout added to Database");
             st.close();
-            con.close();
+            // DO NOT CLOSE THE CONNECTION HERE
+            // con.close();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 
@@ -52,7 +51,8 @@ public class AddWorkout {
         st.setString(7, workoutEdit);
         st.executeUpdate();
         st.close();
-        con.close();
+        // DO NOT CLOSE THE CONNECTION HERE
+        // con.close();
         JOptionPane.showMessageDialog(null, "Workout Edited Successfully");
     }
 
@@ -63,7 +63,8 @@ public class AddWorkout {
         st.setString(1, workout);
         st.executeUpdate();
         st.close();
-        con.close();
+        // DO NOT CLOSE THE CONNECTION HERE
+        // con.close();
 
         JOptionPane.showMessageDialog(null, "Workout Removed Successfully");
     }
@@ -89,7 +90,8 @@ public class AddWorkout {
                 workouts.add(workout);
             }
             st.close();
-            con.close();
+            // DO NOT CLOSE THE CONNECTION HERE
+            // con.close();
             return workouts;
 
         } catch (SQLException e) {
@@ -110,6 +112,9 @@ public class AddWorkout {
                 byte[] imageData = rs.getBytes("image_url");
                 image.put(String.valueOf(workoutID), imageData);
             }
+            st.close();
+            // DO NOT CLOSE THE CONNECTION HERE
+            // con.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -134,9 +139,9 @@ public class AddWorkout {
             workouts.add(workout);
         }
         st.close();
-        con.close();
+        // DO NOT CLOSE THE CONNECTION HERE
+        // con.close();
         return workouts;
 
     }
-
 }
