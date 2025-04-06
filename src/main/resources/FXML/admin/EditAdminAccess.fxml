@@ -4,16 +4,19 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
+<AnchorPane id="anchor" prefHeight="400.0" prefWidth="600.0" stylesheets="@../style_next.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.OntarioTechnicalSolutions.Fit.SceneController">
    <children>
       <ComboBox fx:id="usersDropBox" layoutX="225.0" layoutY="95.0" prefWidth="150.0" />
-      <Label layoutX="252.0" layoutY="50.0" text="Edit Admin Access" />
-      <Label layoutX="156.0" layoutY="99.0" text="Select User" />
+      <Label layoutX="252.0" layoutY="50.0" text="Edit Admin Access" textFill="WHITE">
+         <font>
+            <Font name="Open Sans Bold" size="12.0" />
+         </font></Label>
+      <Label layoutX="156.0" layoutY="99.0" text="Select User" textFill="WHITE" />
       <ComboBox fx:id="accessLevels" layoutX="226.0" layoutY="133.0" prefWidth="150.0" />
-      <Label layoutX="153.0" layoutY="137.0" text="Access Level" />
-      <Button layoutX="249.0" layoutY="303.0" mnemonicParsing="false" onAction="#homeScreenAdmin" text="BACK TO HOME" />
-      <Button layoutX="257.0" layoutY="266.0" mnemonicParsing="false" onAction="#accessEdit" text="EDIT ACCESS" />
+      <Label layoutX="153.0" layoutY="137.0" text="Access Level" textFill="WHITE" />
+      <Button id="admin-button" layoutX="249.0" layoutY="303.0" mnemonicParsing="false" onAction="#homeScreenAdmin" stylesheets="@../style_next.css" text="BACK TO HOME" textFill="WHITE" />
+      <Button id="admin-button" layoutX="257.0" layoutY="266.0" mnemonicParsing="false" onAction="#accessEdit" stylesheets="@../style_next.css" text="EDIT ACCESS" textFill="WHITE" />
    </children>
 </AnchorPane>

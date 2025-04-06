@@ -16,3 +16,12 @@
     -fx-background-color: #16161a;
     -fx-text-fill: white;
 }
+#login-button {
+    -fx-background-color: #f25042;
+    -fx-border-radius: 1000px;
+    -fx-transition: transform 0.3s, box-shadow 0.3s;
+}
+#login-button:hover {
+    -fx-background-color: #e74c3c; /* Hover state color */
+    -fx-transform: scale(1.1) rotate(5deg);   /* Scale effect */
+}
