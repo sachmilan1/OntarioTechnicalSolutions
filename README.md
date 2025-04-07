@@ -98,3 +98,9 @@ This class is responsible for creating essential database tables when the app st
 -Creates the Users table with fields like name, email, username, and password.
 
 -Automatically sets up the User _ PK as the primary key with auto-increment.
+
+**To Watch the demo video click the link below**
+https://drive.google.com/file/d/1Xo9QgAK9YfJLZIjJGKFnPgjz2k2kEkEW/view?usp=sharing
+
+**To download the executable file click the link below**
+https://drive.google.com/file/d/1O5Ew1Akbb72KxGexjLJW96mH7lz7FQLw/view?usp=sharing
