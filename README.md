@@ -1,12 +1,12 @@
-**Documentation-**
+-**Documentation-**
 
 _AddToFavourites.java_
 
-This file handles the logic for adding a workout to a userâ€™s list of favourites in the database.
+This file handles the logic for adding a workout to a user's list of favourites in the database.
 
 It connects to the database, prepares an INSERT statement to add a row to the user _ favorites table, and executes it. If the user has already added that workout before, it catches the duplicate entry error and shows a message saying the workout is already in their favourites.
 
-In short, this class makes sure a user can favourite a workout â€” and get a friendly message if itâ€™s already been added.
+In short, this class makes sure a user can favourite a workout â€” and get a friendly message if it's already been added.
 
 _AddWorkout.java_
 
@@ -18,13 +18,13 @@ _ConnectionProvider.java_
 
 This class sets up the connection to our PostgreSQL database. Since we're packaging the database inside the JAR (in /resources/database/OntarioTechnicalSolutions.db), this class takes care of extracting it, copying it to a temporary file, and connecting to it using JDBC.
 
-I also made sure that it only copies the database once and reuses the temporary file to avoid doing that every time. Thereâ€™s even a fallback for mock connections in case we want to inject a test database.
+I also made sure that it only copies the database once and reuses the temporary file to avoid doing that every time. There's even a fallback for mock connections in case we want to inject a test database.
 
-The connection includes a quick check to make sure the users table exists â€” it creates it if it doesn't. The getCon() method returns the live connection, and setConnection() lets us inject a different one manually (helpful for testing).
+The connection includes a quick check to make sure the users table exists, it creates it if it doesn't. The getCon() method returns the live connection, and setConnection() lets us inject a different one manually (helpful for testing).
 
 _CurrentUser.java_
 
-This class helps us manage the currently logged-in user across the application. We're using the Singleton pattern, which ensures that only one instance of CurrentUser exists during runtime â€” making it easier to access user info from anywhere in the app.
+This class helps us manage the currently logged-in user across the application. We're using the Singleton pattern, which ensures that only one instance of CurrentUser exists during runtime” making it easier to access user info from anywhere in the app.
 
 We use it to store and access:
 
@@ -64,7 +64,7 @@ Entry point of the application
 
 _ProcessImage.java_
 
-This class helps us manage image files for workouts. Weâ€™re using it to take an image from a file path (set by the user), read it, and return it as a byte array so it can be stored in the database.
+This class helps us manage image files for workouts. We're using it to take an image from a file path (set by the user), read it, and return it as a byte array so it can be stored in the database.
 
 -It follows the singleton pattern, so we only ever have one active instance.
 
@@ -91,7 +91,7 @@ It connects all the FXML views with their backend logic and is responsible for s
 _Tables.java_
 
 
-This class is responsible for creating essential database tables when the app starts â€” specifically, the Users table. It checks if the table already exists, and only creates it if needed.
+This class is responsible for creating essential database tables when the app starts” specifically, the Users table. It checks if the table already exists, and only creates it if needed.
 
 -Connects to the SQLite database using our ConnectionProvider.
 
@@ -104,3 +104,5 @@ https://drive.google.com/file/d/1Xo9QgAK9YfJLZIjJGKFnPgjz2k2kEkEW/view?usp=shari
 
 **To download the executable file click the link below**
 https://drive.google.com/file/d/1O5Ew1Akbb72KxGexjLJW96mH7lz7FQLw/view?usp=sharing
+
+**To use this application all you have to do is to download the executable file and run it, To view workouts you can view in all three access modes like admin, registered user and guest, but if you want to save your favourites you need to create an account, and if you have have to add, delete or edit workout you need the admin access.**
